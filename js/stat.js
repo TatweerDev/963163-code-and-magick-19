@@ -31,6 +31,10 @@ var getMaxElement = function(arr) {
   return maxElement;
 };
 
+var getRandomColor = function() {
+  return 'rgba(2, 14, 134,' + Math.random() + ')';
+};
+
 window.renderStatistics = (function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -40,13 +44,14 @@ window.renderStatistics = (function (ctx, names, times) {
   ctx.font = "16px PT Mono";
   ctx.fillStyle = NAMES_COLOR;
   ctx.fillText('Ура вы победили!', 130, 40);
-  ctx.fillText('Список результатов:', 130, 60);  
+  ctx.fillText('Список результатов:', 130, 60);
 
   for (var i = 0; i < names.length; i++) {
-    if (names [i] == 'Вы') {
+
+    if (names[i] == 'Вы') {
       var columnColor = 'rgba(255, 0, 0, 1)';
     } else {
-      var columnColor = 'rgba(2,14,134, 1)';
+      var columnColor = getRandomColor();
     }        
 
     ctx.fillStyle = NAMES_COLOR;
