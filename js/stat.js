@@ -8,9 +8,9 @@ var GAP = 10;
 var FONT_GAP = 50;
 var COLUMN_WIDTH = 40;
 var COLUMN_X = 150;
-var COLUMN_Y = 100;
+var COLUMN_Y = 240;
 var COLUMN_GAP = FONT_GAP + COLUMN_WIDTH;
-var NAMES_Y = 270;
+var NAMES_Y = 260;
 var NAMES_COLOR = 'rgba(0, 0, 0, 1)';
 var columnMaxHeigth = 150;
 
@@ -57,6 +57,6 @@ window.renderStatistics = (function (ctx, names, times) {
     ctx.fillStyle = NAMES_COLOR;
     ctx.fillText(names [i], COLUMN_X + COLUMN_GAP * i, NAMES_Y);
     ctx.fillStyle = columnColor;
-    ctx.fillRect(COLUMN_X + COLUMN_GAP * i, COLUMN_Y, COLUMN_WIDTH, (maxTime * columnMaxHeigth)/ times[i]);
+    ctx.fillRect(COLUMN_X + COLUMN_GAP * i, COLUMN_Y, COLUMN_WIDTH, ((times[i] * columnMaxHeigth)/ maxTime) * -1 );
   }
 });
