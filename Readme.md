@@ -1,7 +1,9 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
+
 * Студент: [Чумаслов Александр] (https://up.htmlacademy.ru/javascript/19/user/963163).
 * Наставник: [Убайд  Исаев] (https://htmlacademy.ru/profile/id1340949).
+=======
 
 ---
 
