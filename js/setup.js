@@ -28,13 +28,22 @@ var getRandomIndex = function (arr) {
 };
 
 //Создаем DOM элемент для сгенерированных персонажей
-var numberOfPlayers = 4;
 
-for (var i = 0; i < numberOfPlayers; i++) {
+
+var renderWizard = function () {
   var wizardElement = similarWizardTemplate.cloneNode(true);
   wizardElement.querySelector('.setup-similar-label').textContent = getRandomName();
   wizardElement.querySelector('.wizard-coat').style.fill = COAT_COLORS[getRandomIndex(COAT_COLORS)];  
   wizardElement.querySelector('.wizard-eyes').style.fill = EYE_COLOR[getRandomIndex(EYE_COLOR)];
   
-  similarListElement.appendChild(wizardElement);
+  return wizardElement;
 };
+
+//Отрисуем сгенерированные DOM-элементы в блок '.setup-similar-list' (переменная similarListElement)
+var numberOfPlayers = 4;
+
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < numberOfPlayers; i++) {
+  fragment.appendChild(renderWizard());
+}
+similarListElement.appendChild(fragment);
