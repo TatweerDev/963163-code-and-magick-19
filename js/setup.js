@@ -29,15 +29,15 @@ var getRandomIndex = function (arr) {
 
 // Создаем DOM элемент для сгенерированных персонажей
 var createPlayers = function () {
-  var players = []
+  var players = [];
   for (var i = 0; i < numberOfPlayers; i++) {
     var player = {
       name: getRandomName(),
       coatColor: COAT_COLORS[getRandomIndex(COAT_COLORS)],
       eyesColor: EYE_COLOR[getRandomIndex(EYE_COLOR)]
+    };
+    players.push(player);
   }
-  players.push(player)
-  };
   return players;
 };
 
@@ -52,6 +52,5 @@ var renderWizard = function () {
     fragment.appendChild(wizardElement);
   }
   similarListElement.appendChild(fragment);
-}; 
-  
-renderWizard()
+};
+renderWizard();
