@@ -14,24 +14,23 @@ var NAMES_Y = 260;
 var NAMES_COLOR = 'rgba(0, 0, 0, 1)';
 var columnMaxHeigth = 150;
 
-var renderCloud = function(ctx, x, y, color) {
+var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var getMaxElement = function(arr) {
+var getMaxElement = function (arr) {
   var maxElement = arr[0];
-  
+
   for (var i = 0; i < arr.length; i++) {
     if (arr[i] > maxElement) {
       maxElement = arr[i];
     }
   }
-  
   return maxElement;
 };
 
-var getRandomColor = function() {
+var getRandomColor = function () {
   return 'rgba(2, 14, 134,' + Math.random() + ')';
 };
 
@@ -41,22 +40,22 @@ window.renderStatistics = (function (ctx, names, times) {
 
   var maxTime = getMaxElement(times);
 
-  ctx.font = "16px PT Mono";
+  ctx.font = '16px PT Mono';
   ctx.fillStyle = NAMES_COLOR;
   ctx.fillText('Ура вы победили!', 130, 40);
   ctx.fillText('Список результатов:', 130, 60);
 
   for (var i = 0; i < names.length; i++) {
 
-    if (names[i] == 'Вы') {
+    if (names[i] === 'Вы') {
       var columnColor = 'rgba(255, 0, 0, 1)';
     } else {
-      var columnColor = getRandomColor();
-    }        
+      columnColor = getRandomColor();
+    }
 
     ctx.fillStyle = NAMES_COLOR;
     ctx.fillText(names [i], COLUMN_X + COLUMN_GAP * i, NAMES_Y);
     ctx.fillStyle = columnColor;
-    ctx.fillRect(COLUMN_X + COLUMN_GAP * i, COLUMN_Y, COLUMN_WIDTH, ((times[i] * columnMaxHeigth)/ maxTime) * -1 );
+    ctx.fillRect(COLUMN_X + COLUMN_GAP * i, COLUMN_Y, COLUMN_WIDTH, ((times[i] * columnMaxHeigth) / maxTime) * -1);
   }
 });
