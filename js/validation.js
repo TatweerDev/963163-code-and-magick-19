@@ -3,7 +3,7 @@
 // Функция валидации данных формы 
 
 (function () {
-    var userNameInput = userDialog.querySelector('.setup-user-name');
+    var userNameInput = document.querySelector('.setup-user-name');
     var MIN_NAME_LENGTH = 2;    
 
     userNameInput.addEventListener('invalid', function () {
