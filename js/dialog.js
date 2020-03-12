@@ -10,6 +10,7 @@
   var onPopupEscPress = function (evt) {
     window.util.isEscEvent(evt, closePopup);
   };
+
   var openPopup = function () {
     userDialog.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
@@ -19,6 +20,17 @@
     userDialog.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
   };
+
+  // Отправка данных на сервер
+  var form = userDialog.querySelector('.setup-wizard-form');
+  var onSuccess = function () {
+    userDialog.classList.add('hidden');
+  };
+
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(window.backend.POST_URL, onSuccess, window.util.errorHandler, new FormData(form));
+  });
 
   playerIcon.addEventListener('click', function () {
     openPopup();
