@@ -2,13 +2,10 @@
 
 (function () {
   // Объявление массивов с данными игроков
-  var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-  var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
   var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
   var EYE_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-
-  var numberOfPlayers = 4;
+  var userDialog = document.querySelector('.setup');
 
   // Показываем меню настроек персонажа
   var playerMenuSetup = document.querySelector('.setup-similar');
@@ -58,33 +55,26 @@
   });
 
   // Создаем DOM элемент для сгенерированных персонажей
-  var getRandomName = function () {
-    return window.util.getRandomValueFromArray(NAMES) + ' ' + window.util.getRandomValueFromArray(SURNAMES);
-  };
-  var createPlayers = function () {
-    var players = [];
-    for (var i = 0; i < numberOfPlayers; i++) {
-      var player = {
-        name: getRandomName(),
-        coatColor: window.util.getRandomValueFromArray(COAT_COLORS),
-        eyesColor: window.util.getRandomValueFromArray(EYE_COLOR)
-      };
-      players.push(player);
-    }
-    return players;
+
+  var renderWizard = function (wizard) {
+    var wizardElement = similarWizardTemplate.cloneNode(true);
+    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
+    return wizardElement;
   };
 
-  var renderWizard = function () {
-    var players = createPlayers();
+  var successHandler = function (wizards) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < players.length; i++) {
-      var wizardElement = similarWizardTemplate.cloneNode(true);
-      wizardElement.querySelector('.setup-similar-label').textContent = players[i].name;
-      wizardElement.querySelector('.wizard-coat').style.fill = players[i].coatColor;
-      wizardElement.querySelector('.wizard-eyes').style.fill = players[i].eyesColor;
-      fragment.appendChild(wizardElement);
+    var wizardsCount = 4;
+
+    for (var i = 0; i < wizardsCount; i++) {
+      fragment.appendChild(renderWizard(wizards[i]));
     }
     similarListElement.appendChild(fragment);
+
+    userDialog.querySelector('.setup-similar').classList.remove('hidden');
   };
-  renderWizard();
+
+  window.backend.load(window.backend.GET_URL, successHandler, window.util.errorHandler);
 })();
