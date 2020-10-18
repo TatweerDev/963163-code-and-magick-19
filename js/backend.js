@@ -15,7 +15,7 @@
       }
     });
     xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
+      onError('Не удалось загрузить профили игроков');
     });
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
